@@ -1,0 +1,6 @@
+framework module Pods_StasChat {
+  umbrella header "Pods-StasChat-umbrella.h"
+
+  export *
+  module * { export * }
+}
