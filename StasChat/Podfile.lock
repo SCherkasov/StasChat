@@ -16,20 +16,20 @@ PODS:
   - FirebaseAnalytics (5.0.1):
     - FirebaseCore (~> 5.0)
     - FirebaseInstanceID (~> 3.0)
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
   - FirebaseAuth (5.0.2):
     - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (5.0.5):
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseDatabase (5.0.2):
     - FirebaseCore (~> 5.0)
     - leveldb-library (~> 1.18)
   - FirebaseInstanceID (3.1.1):
     - FirebaseCore (~> 5.0)
   - GoogleToolboxForMac/Defines (2.1.4)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+  - GoogleToolboxForMac/NSData+zlib (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.1.15)
   - leveldb-library (1.20)
@@ -47,21 +47,6 @@ DEPENDENCIES:
   - Firebase/Database
   - SVProgressHUD
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - ChameleonFramework
-    - Firebase
-    - FirebaseAnalytics
-    - FirebaseAuth
-    - FirebaseCore
-    - FirebaseDatabase
-    - FirebaseInstanceID
-    - GoogleToolboxForMac
-    - GTMSessionFetcher
-    - leveldb-library
-    - nanopb
-    - SVProgressHUD
-
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
@@ -78,4 +63,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f22b564eee1cfec44aece95ffe79b69a94442839
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0

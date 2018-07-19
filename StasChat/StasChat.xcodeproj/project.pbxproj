@@ -164,6 +164,7 @@
 				8ABDCFED20FA3EF40001FB2F /* Frameworks */,
 				8ABDCFEE20FA3EF40001FB2F /* Resources */,
 				9959A9F93BECA50DD8663463 /* [CP] Embed Pods Frameworks */,
+				772F413DF754DE0B4D8A5868 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -223,6 +224,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		772F413DF754DE0B4D8A5868 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StasChat/Pods-StasChat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9959A9F93BECA50DD8663463 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -429,13 +445,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HH9AF9DGX8;
+				DEVELOPMENT_TEAM = 49DH34YDV8;
 				INFOPLIST_FILE = StasChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = home.StasChat;
+				PRODUCT_BUNDLE_IDENTIFIER = home.StasChat.mentoring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -448,13 +465,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HH9AF9DGX8;
+				DEVELOPMENT_TEAM = 49DH34YDV8;
 				INFOPLIST_FILE = StasChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = home.StasChat;
+				PRODUCT_BUNDLE_IDENTIFIER = home.StasChat.mentoring;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
