@@ -35,10 +35,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="u3d-DZ-eR0" firstAttribute="width" secondItem="E7l-a9-UyE" secondAttribute="width" multiplier="0.9" id="Xd9-vQ-PXa"/>
-                                    <constraint firstAttribute="width" constant="69" id="g7V-Tq-Mma"/>
                                     <constraint firstItem="u3d-DZ-eR0" firstAttribute="centerX" secondItem="E7l-a9-UyE" secondAttribute="centerX" id="kNh-4C-uZZ"/>
                                     <constraint firstItem="u3d-DZ-eR0" firstAttribute="centerY" secondItem="E7l-a9-UyE" secondAttribute="centerY" id="m3h-dj-eQm"/>
                                     <constraint firstItem="u3d-DZ-eR0" firstAttribute="height" secondItem="E7l-a9-UyE" secondAttribute="height" multiplier="0.9" id="nnF-Dg-inp"/>
+                                    <constraint firstAttribute="height" priority="500" constant="61.899999999999999" id="tUA-OC-nIx"/>
                                     <constraint firstAttribute="width" secondItem="E7l-a9-UyE" secondAttribute="height" multiplier="69:61" id="zbS-Ll-iII"/>
                                 </constraints>
                             </view>
