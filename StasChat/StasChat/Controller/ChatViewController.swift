@@ -81,6 +81,12 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
             selector: #selector(ChatViewController.keyboardDidShow(_:)),
             name: NSNotification.Name.UIKeyboardDidShow, object: nil
         )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(ChatViewController.keyboardDidHide(_:)),
+            name: NSNotification.Name.UIKeyboardDidHide, object: nil
+        )
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,10 +105,14 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
         self.scrollToTheMessagesBottom()
     }
     
+    @objc func keyboardDidHide(_ notification: Notification) {
+        self.scrollToTheMessagesBottom()
+    }
+    
     func scrollToTheMessagesBottom() {
         self.messageTableView.scrollToRow(
-            at: IndexPath.init(row: self.messages.count-1, section: 0),
-            at: UITableViewScrollPosition.none,
+            at: IndexPath.init(row: self.messages.count - 1, section: 0),
+            at: UITableViewScrollPosition.bottom,
             animated: true
         )
     }
