@@ -19,6 +19,28 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var tapGesture: UITapGestureRecognizer?
     
+    @IBOutlet weak var baseViewheightConstraint: NSLayoutConstraint!
+    
+    var messages = [
+        "first",
+        "secgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgggggggggggggggggggond",
+        "third",
+        "1",
+        "2",
+        "3",
+        "43525",
+        "third",
+        "1",
+        "2",
+        "3",
+        "43525",
+        "third",
+        "1",
+        "2",
+        "3",
+        "last message"
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +69,42 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
         self.tapGesture = tapGesture
         tapGesture.delegate = self
         self.sendButton.addGestureRecognizer(tapGesture)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(ChatViewController.keyboardWillShow(_:)),
+            name: NSNotification.Name.UIKeyboardWillShow, object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(ChatViewController.keyboardDidShow(_:)),
+            name: NSNotification.Name.UIKeyboardDidShow, object: nil
+        )
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.scrollToTheMessagesBottom()
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let size
+            = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect)?.size
+        {
+            self.baseViewheightConstraint.constant = size.height
+        }
+    }
+    
+    @objc func keyboardDidShow(_ notification: Notification) {
+        self.scrollToTheMessagesBottom()
+    }
+    
+    func scrollToTheMessagesBottom() {
+        self.messageTableView.scrollToRow(
+            at: IndexPath.init(row: self.messages.count-1, section: 0),
+            at: UITableViewScrollPosition.none,
+            animated: true
+        )
     }
     
     @IBAction func logOutPressed(_ sender: Any) {
@@ -59,11 +117,34 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        
+    }
+    
     @objc func sendButtonTouched(_ sender: UIGestureRecognizer) {
-        UIView.animate(withDuration: 0.3) {
-            self.controlPanelHeightConstaint.constant = 0
-            self.view.layoutIfNeeded()
-        }
+        self.messages.append(self.messageTextField.text ?? "")
+        self.messageTextField.text = nil
+        
+        self.messageTableView.beginUpdates()
+        self.messageTableView.insertRows(
+            at: [IndexPath.init(row: self.messages.count - 1, section: 0)],
+            with: .fade
+        )
+        self.messageTableView.endUpdates()
+        
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0.1,
+            options: UIViewAnimationOptions.beginFromCurrentState,
+            animations: {
+                
+                self.messageTextField.resignFirstResponder()
+                //self.controlPanelHeightConstaint.constant = 0
+                self.baseViewheightConstraint.constant = 0
+            },
+            completion: { completion in
+            }
+        )
     }
 }
 
@@ -74,7 +155,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,13 +165,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
             for: indexPath
         ) as! CustomMessageCell
         
-        let messageArray = [
-            "first",
-            "secgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgggggggggggggggggggond",
-            "third"
-        ]
-        
-        cell.messageBodyLabel.text = messageArray[indexPath.row]
+        cell.messageBodyLabel.text = messages[indexPath.row]
         
         return cell
     }
