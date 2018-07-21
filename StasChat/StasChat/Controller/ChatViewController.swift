@@ -27,16 +27,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     "third",
     "1",
     "2",
-    "3",
-    "43525",
-    "third",
-    "1",
-    "2",
-    "3",
-    "43525",
-    "third",
-    "1",
-    "2",
+    "12",
     "3",
     "last message"
   ]
@@ -127,10 +118,6 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     }
   }
   
-  override func viewDidLayoutSubviews() {
-    
-  }
-  
   @objc func sendButtonTouched(_ sender: UIGestureRecognizer) {
     self.messages.append(self.messageTextField.text ?? "")
     self.messageTextField.text = nil
@@ -149,7 +136,6 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
       animations: {
         
         self.messageTextField.resignFirstResponder()
-        //self.controlPanelHeightConstaint.constant = 0
         self.baseViewheightConstraint.constant = 0
     },
       completion: { completion in
@@ -188,13 +174,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ChatViewController: UITextFieldDelegate {
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    //        heightConstraint.constant = 370
-    //        view.layoutIfNeeded()
-    //scrollView.setContentOffset(CGPoint(x: 0, y: 250), animated: true)
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    //scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
   }
 }
 
