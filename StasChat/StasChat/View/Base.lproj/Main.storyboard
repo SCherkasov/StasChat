@@ -365,7 +365,11 @@
                         <viewLayoutGuide key="safeArea" id="OdL-7Y-oyi"/>
                     </view>
                     <navigationItem key="navigationItem" id="s5h-KI-iJo">
-                        <barButtonItem key="rightBarButtonItem" title="Log out" id="C29-LK-sbA"/>
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="C29-LK-sbA">
+                            <connections>
+                                <action selector="logOutPressed:" destination="hoH-GX-cza" id="mUj-Za-J6s"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="baseViewheightConstraint" destination="1dX-iW-v8G" id="7u0-fV-reo"/>

@@ -112,6 +112,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     do {
       try Auth.auth().signOut()
       navigationController?.popToRootViewController(animated: true)
+      print("logout")
     }
     catch {
       print("erorr to log out")
