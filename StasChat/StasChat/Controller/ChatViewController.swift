@@ -9,71 +9,193 @@
 import UIKit
 import Firebase
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
+  
+  @IBOutlet var messageTextField: UITextField!
+  @IBOutlet var sendButton: UIView!
+  @IBOutlet var messageTableView: UITableView!
+  @IBOutlet weak var controlPanelHeightConstaint: NSLayoutConstraint!
+  @IBOutlet weak var sendButtonLabel: UILabel!
+  
+  var tapGesture: UITapGestureRecognizer?
+  
+  @IBOutlet weak var baseViewheightConstraint: NSLayoutConstraint!
+  
+  var messages = [
+    "first",
+    "secgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgggggggggggggggggggond",
+    "third",
+    "1",
+    "2",
+    "3",
+    "43525",
+    "third",
+    "1",
+    "2",
+    "3",
+    "43525",
+    "third",
+    "1",
+    "2",
+    "3",
+    "last message"
+  ]
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    @IBOutlet var messageTextField: UITextField!
-    @IBOutlet var sendButton: UIButton!
-    @IBOutlet var messageTableView: UITableView!
-    @IBOutlet var scrollView: UIScrollView!
+    let customMessageCellNib
+      = UINib.init(
+        nibName: "CustomMessageCell",
+        bundle: nil
+    )
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        messageTableView.register(UINib(nibName: "CustomMessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
-        
-        configurateTableView()
-        
-        messageTextField.delegate = self
-
+    messageTableView.register(
+      customMessageCellNib,
+      forCellReuseIdentifier: "MessageCell"
+    )
+    
+    configurateTableView()
+    
+    messageTextField.delegate = self
+    
+    self.messageTableView.dataSource = self
+    
+    let tapGesture = UITapGestureRecognizer.init(
+      target: self,
+      action: #selector(ChatViewController.sendButtonTouched(_:))
+    )
+    
+    self.tapGesture = tapGesture
+    tapGesture.delegate = self
+    self.sendButton.addGestureRecognizer(tapGesture)
+    
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(ChatViewController.keyboardWillShow(_:)),
+      name: NSNotification.Name.UIKeyboardWillShow, object: nil
+    )
+    
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(ChatViewController.keyboardDidShow(_:)),
+      name: NSNotification.Name.UIKeyboardDidShow, object: nil
+    )
+    
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(ChatViewController.keyboardDidHide(_:)),
+      name: NSNotification.Name.UIKeyboardDidHide, object: nil
+    )
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    self.scrollToTheMessagesBottom()
+  }
+  
+  @objc func keyboardWillShow(_ notification: Notification) {
+    if let size
+      = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect)?.size
+    {
+      self.baseViewheightConstraint.constant = size.height
     }
+  }
+  
+  @objc func keyboardDidShow(_ notification: Notification) {
+    self.scrollToTheMessagesBottom()
+  }
+  
+  @objc func keyboardDidHide(_ notification: Notification) {
+    self.scrollToTheMessagesBottom()
+  }
+  
+  func scrollToTheMessagesBottom() {
+    self.messageTableView.scrollToRow(
+      at: IndexPath.init(row: self.messages.count - 1, section: 0),
+      at: UITableViewScrollPosition.bottom,
+      animated: true
+    )
+  }
+  
+  @IBAction func logOutPressed(_ sender: Any) {
+    do {
+      try Auth.auth().signOut()
+      navigationController?.popToRootViewController(animated: true)
+    }
+    catch {
+      print("erorr to log out")
+    }
+  }
+  
+  override func viewDidLayoutSubviews() {
     
-    @IBAction func logOutPressed(_ sender: Any) {
+  }
+  
+  @objc func sendButtonTouched(_ sender: UIGestureRecognizer) {
+    self.messages.append(self.messageTextField.text ?? "")
+    self.messageTextField.text = nil
+    
+    self.messageTableView.beginUpdates()
+    self.messageTableView.insertRows(
+      at: [IndexPath.init(row: self.messages.count - 1, section: 0)],
+      with: .fade
+    )
+    self.messageTableView.endUpdates()
+    
+    UIView.animate(
+      withDuration: 0.3,
+      delay: 0.1,
+      options: UIViewAnimationOptions.beginFromCurrentState,
+      animations: {
         
-        do {
-            try Auth.auth().signOut()
-            navigationController?.popToRootViewController(animated: true)
-        }
-        catch {
-            print("erorr to log out")
-        }
+        self.messageTextField.resignFirstResponder()
+        //self.controlPanelHeightConstaint.constant = 0
+        self.baseViewheightConstraint.constant = 0
+    },
+      completion: { completion in
     }
-    
-    @IBAction func sendPressed(_ sender: Any) {
-    }
+    )
+  }
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return self.messages.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
+    let cell = tableView.dequeueReusableCell(
+      withIdentifier: "MessageCell",
+      for: indexPath
+      ) as! CustomMessageCell
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! CustomMessageCell
-        
-        let messageArray = ["first", "secgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgggggggggggggggggggond", "third"]
-        
-        cell.messageBodyLabel.text = messageArray[indexPath.row]
-        
-        return cell
-    }
+    cell.messageBodyLabel.text = messages[indexPath.row]
     
-    func configurateTableView() {
-        messageTableView.rowHeight = UITableViewAutomaticDimension
-        messageTableView.estimatedRowHeight = 120
-    }
+    return cell
+  }
+  
+  func configurateTableView() {
+    messageTableView.rowHeight = UITableViewAutomaticDimension
+    messageTableView.estimatedRowHeight = 120
+  }
 }
 
 extension ChatViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        heightConstraint.constant = 370
-//        view.layoutIfNeeded()
-        scrollView.setContentOffset(CGPoint(x: 0, y: 250), animated: true)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-    }
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    //        heightConstraint.constant = 370
+    //        view.layoutIfNeeded()
+    //scrollView.setContentOffset(CGPoint(x: 0, y: 250), animated: true)
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    //scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+  }
 }
 
 
