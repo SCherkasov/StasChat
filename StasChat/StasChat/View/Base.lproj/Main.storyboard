@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WUc-W4-UaU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vEJ-9g-OKV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -31,14 +31,14 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                                                 <color key="backgroundColor" red="0.61960784313725492" green="0.45882352941176469" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="375" id="5YG-od-ZQX"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="375" id="5YG-od-ZQX"/>
                                                     <constraint firstAttribute="height" constant="48" id="FSD-eA-liS"/>
                                                 </constraints>
                                                 <state key="normal" title="Log in">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="BEd-I5-qoM" kind="push" identifier="goToLogIn" id="b9v-tj-ooH"/>
+                                                    <segue destination="BEd-I5-qoM" kind="show" identifier="goToLogIn" id="mDv-dC-OmZ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-7S-MBm">
@@ -46,13 +46,13 @@
                                                 <color key="backgroundColor" red="0.59999999999999998" green="0.20392156862745098" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="egz-bd-x4b"/>
-                                                    <constraint firstAttribute="width" constant="375" id="hSt-OH-0Eg"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="375" id="hSt-OH-0Eg"/>
                                                 </constraints>
                                                 <state key="normal" title="Register">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="FCI-ns-mHK" kind="show" identifier="goToRegistration" id="hm4-6Y-SPx"/>
+                                                    <segue destination="FCI-ns-mHK" kind="show" identifier="goToRegistration" id="cWs-tU-PKn"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -82,12 +82,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="UkQ-Jq-UBz"/>
                     <connections>
-                        <segue destination="hoH-GX-cza" kind="push" identifier="goToChat" id="JHy-oK-gGF"/>
+                        <segue destination="hoH-GX-cza" kind="show" identifier="goToChat" id="v5O-z3-aOA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="846" y="103"/>
+            <point key="canvasLocation" x="1784.8" y="102.99850074962519"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="WLa-I2-5JG">
@@ -109,7 +109,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email:" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="w8e-Mn-05z">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="280" id="823-YC-3O9"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="280" id="823-YC-3O9"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -158,12 +158,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="w8e-Mn-05z" id="hEt-af-x82"/>
                         <outlet property="passwordTextField" destination="x3W-Le-76B" id="8nx-NM-aLf"/>
-                        <segue destination="hoH-GX-cza" kind="push" identifier="goToChat" id="oVs-dQ-DHz"/>
+                        <segue destination="hoH-GX-cza" kind="show" identifier="goToChat" id="dl7-cy-uxR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OH2-g1-gP3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1654" y="-292"/>
+            <point key="canvasLocation" x="2592.8000000000002" y="-292.80359820089956"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="VcY-Xd-J07">
@@ -185,7 +185,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email:" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="bcW-J5-fCM">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="280" id="Sfs-Mg-EYs"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="280" id="Sfs-Mg-EYs"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -233,30 +233,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="bcW-J5-fCM" id="H20-ge-NSs"/>
                         <outlet property="passwordTextField" destination="R0Q-rX-5Za" id="WCj-ae-yBk"/>
-                        <segue destination="hoH-GX-cza" kind="push" identifier="goToTheChat" id="BBR-nU-Kc1"/>
+                        <segue destination="hoH-GX-cza" kind="show" identifier="goToTheChat" id="3eo-hl-9SV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9JO-DA-3D7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1654" y="551"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="h9z-br-BVK">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WUc-W4-UaU" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c8v-iT-Wjj">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="FiG-mP-aJJ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X3u-JC-lOF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-10" y="103"/>
+            <point key="canvasLocation" x="2592.8000000000002" y="550.97451274362822"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="CWI-KG-knt">
@@ -396,7 +378,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gA1-w6-xIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2616.8000000000002" y="102.99850074962519"/>
+            <point key="canvasLocation" x="3556" y="102.99850074962519"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bSH-HN-9Yf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vEJ-9g-OKV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tTO-05-XoV">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ald-hz-DgU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zot-io-r1E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="845.60000000000002" y="102.99850074962519"/>
         </scene>
     </scenes>
     <resources>
@@ -404,6 +404,6 @@
         <image name="dry-leaf-hd-wallpaper-leaf-126590" width="5760" height="3840"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JHy-oK-gGF"/>
+        <segue reference="v5O-z3-aOA"/>
     </inferredMetricsTieBreakers>
 </document>
