@@ -35,8 +35,6 @@ class RegisterViewController: UIViewController {
                 print("Succesfull")
                 self.performSegue(withIdentifier: "goToTheChat", sender: self)
             }
-            
-            
         }
     }
 }

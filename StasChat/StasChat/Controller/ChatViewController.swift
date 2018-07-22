@@ -19,6 +19,8 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   
   var tapGesture: UITapGestureRecognizer?
   
+  let viewControll = ViewController()
+  
   @IBOutlet weak var baseViewheightConstraint: NSLayoutConstraint!
   
   var messages = [
@@ -34,6 +36,14 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    viewControll.translucentNavBar()
+    
+    // Hide backBarButtonItem
+    let backButton = UIBarButtonItem(title: "", style: .plain,
+                                     target: navigationController, action: nil)
+    navigationItem.leftBarButtonItem = backButton
+    //***********************
     
     let customMessageCellNib
       = UINib.init(
@@ -196,5 +206,3 @@ extension ChatViewController: UITextFieldDelegate {
   func textFieldDidEndEditing(_ textField: UITextField) {
   }
 }
-
-
