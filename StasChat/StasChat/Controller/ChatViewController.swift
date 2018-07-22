@@ -121,8 +121,24 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   
   @objc func sendButtonTouched(_ sender: UIGestureRecognizer) {
     self.messages.append(self.messageTextField.text ?? "")
-    self.messageTextField.text = nil
     
+    // Add message to FireBase
+    let messageDB = Database.database().reference().child("Messages")
+    let messageDictionary = ["Sender": Auth.auth().currentUser?.email,
+                             "MessageBody": self.messageTextField.text!]
+    
+    messageDB.childByAutoId().setValue(messageDictionary) {
+      (error, reference) in
+      
+      if error != nil {
+        print(error!)
+      } else {
+        print("Message save seccesfully")
+      }
+    }
+    //*************************
+    
+    self.messageTextField.text = nil
     self.messageTableView.beginUpdates()
     self.messageTableView.insertRows(
       at: [IndexPath.init(row: self.messages.count - 1, section: 0)],
