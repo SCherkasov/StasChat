@@ -19,7 +19,6 @@
 		8ABDD01220FA93870001FB2F /* CustomMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABDD01020FA93870001FB2F /* CustomMessageCell.swift */; };
 		8ABDD01320FA93870001FB2F /* CustomMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ABDD01120FA93870001FB2F /* CustomMessageCell.xib */; };
 		8ABDD01620FB97CF0001FB2F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABDD01520FB97CF0001FB2F /* Message.swift */; };
-		8ABDD01920FBAD440001FB2F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABDD01820FBAD440001FB2F /* TestViewController.swift */; };
 		9A7B3DEE3DD0D6C1CC51A675 /* Pods_StasChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4780CCE4F01360AFC93B91 /* Pods_StasChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +39,6 @@
 		8ABDD01020FA93870001FB2F /* CustomMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMessageCell.swift; sourceTree = "<group>"; };
 		8ABDD01120FA93870001FB2F /* CustomMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMessageCell.xib; sourceTree = "<group>"; };
 		8ABDD01520FB97CF0001FB2F /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		8ABDD01820FBAD440001FB2F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		C8006F529F1F6281C194A1A9 /* Pods-StasChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StasChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StasChat/Pods-StasChat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				8ABDCFF520FA3EF40001FB2F /* ViewController.swift */,
-				8ABDD01820FBAD440001FB2F /* TestViewController.swift */,
 				8ABDD00C20FA6DF90001FB2F /* ChatViewController.swift */,
 				8ABDD00E20FA81F60001FB2F /* LoginViewController.swift */,
 				8ABDD00A20FA644F0001FB2F /* RegisterViewController.swift */,
@@ -278,7 +275,6 @@
 			files = (
 				8ABDD01220FA93870001FB2F /* CustomMessageCell.swift in Sources */,
 				8ABDD00B20FA644F0001FB2F /* RegisterViewController.swift in Sources */,
-				8ABDD01920FBAD440001FB2F /* TestViewController.swift in Sources */,
 				8ABDCFF620FA3EF40001FB2F /* ViewController.swift in Sources */,
 				8ABDD00D20FA6DF90001FB2F /* ChatViewController.swift in Sources */,
 				8ABDD00F20FA81F60001FB2F /* LoginViewController.swift in Sources */,

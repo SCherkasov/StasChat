@@ -13,10 +13,14 @@ class RegisterViewController: UIViewController {
     
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-    
-
+    @IBOutlet var registerButton: UIButton!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      registerButton.layer.cornerRadius = 15
+      registerButton.clipsToBounds = true
+      
     }
     
     @IBAction func registerPressedButton(_ sender: Any) {

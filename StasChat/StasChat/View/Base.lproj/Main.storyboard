@@ -124,7 +124,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GI-Om-Vbe">
                                                 <rect key="frame" x="0.0" y="82" width="280" height="30"/>
                                                 <color key="backgroundColor" red="0.90980392156862744" green="0.41176470588235292" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="SignIn">
+                                                <state key="normal" title="Sign in">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -158,6 +158,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="w8e-Mn-05z" id="hEt-af-x82"/>
                         <outlet property="passwordTextField" destination="x3W-Le-76B" id="8nx-NM-aLf"/>
+                        <outlet property="signInButton" destination="1GI-Om-Vbe" id="ZDQ-W9-7vG"/>
                         <segue destination="hoH-GX-cza" kind="show" identifier="goToChat" id="dl7-cy-uxR"/>
                     </connections>
                 </viewController>
@@ -233,6 +234,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="bcW-J5-fCM" id="H20-ge-NSs"/>
                         <outlet property="passwordTextField" destination="R0Q-rX-5Za" id="WCj-ae-yBk"/>
+                        <outlet property="registerButton" destination="LZd-to-kFF" id="S4H-fx-igd"/>
                         <segue destination="hoH-GX-cza" kind="show" identifier="goToTheChat" id="3eo-hl-9SV"/>
                     </connections>
                 </viewController>
@@ -408,6 +410,6 @@
         <image name="dry-leaf-hd-wallpaper-leaf-126590" width="5760" height="3840"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v5O-z3-aOA"/>
+        <segue reference="3eo-hl-9SV"/>
     </inferredMetricsTieBreakers>
 </document>
