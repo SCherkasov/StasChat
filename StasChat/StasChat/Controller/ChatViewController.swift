@@ -23,16 +23,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   
   @IBOutlet weak var baseViewheightConstraint: NSLayoutConstraint!
   
-  var messages = [
-    "first",
-    "secgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgdgggggggggggggggggggond",
-    "third",
-    "1",
-    "2",
-    "12",
-    "3",
-    "last message"
-  ]
+  var messageArray = [Message]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -91,7 +82,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   }
   
   override func viewDidAppear(_ animated: Bool) {
-    self.scrollToTheMessagesBottom()
+      self.scrollToTheMessagesBottom()
   }
   
   @objc func keyboardWillShow(_ notification: Notification) {
@@ -103,19 +94,23 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   }
   
   @objc func keyboardDidShow(_ notification: Notification) {
-    self.scrollToTheMessagesBottom()
+      self.scrollToTheMessagesBottom()
   }
   
   @objc func keyboardDidHide(_ notification: Notification) {
-    self.scrollToTheMessagesBottom()
+      self.scrollToTheMessagesBottom()
   }
   
   func scrollToTheMessagesBottom() {
+    if messageArray.count > 0 {
     self.messageTableView.scrollToRow(
-      at: IndexPath.init(row: self.messages.count - 1, section: 0),
+      at: IndexPath.init(row: self.messageArray.count - 1, section: 0),
       at: UITableViewScrollPosition.bottom,
       animated: true
     )
+    } else {
+      messageTableView.reloadData()
+    }
   }
   
   @IBAction func logOutPressed(_ sender: Any) {
@@ -130,8 +125,8 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   }
   
   @objc func sendButtonTouched(_ sender: UIGestureRecognizer) {
-    self.messages.append(self.messageTextField.text ?? "")
-    
+    //self.messages.append(self.messageTextField.text ?? "")
+   
     // Add message to FireBase
     let messageDB = Database.database().reference().child("Messages")
     let messageDictionary = ["Sender": Auth.auth().currentUser?.email,
@@ -145,15 +140,47 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
       } else {
         print("Message save seccesfully")
       }
+    
     }
     //*************************
     
+    func retrieveMessages() {
+      let messageDB = Database.database().reference().child("Messages")
+      messageDB.observe(.childAdded, with: { (snapshot) in
+        let snapshotValue = snapshot.value as! Dictionary<String, String>
+        let text = snapshotValue["MessageBody"]!
+        let sender = snapshotValue["Sender"]!
+        print(text, sender)
+        let message = Message()
+        message.messageBody = text
+        message.sender = sender
+        self.messageArray.append(message)
+        self.configurateTableView()
+        //self.messageTableView.reloadData()
+      })
+    }
+    
     self.messageTextField.text = nil
     self.messageTableView.beginUpdates()
-    self.messageTableView.insertRows(
-      at: [IndexPath.init(row: self.messages.count - 1, section: 0)],
+    
+    if messageArray.isEmpty {
+      self.messageTableView.insertRows(at: [IndexPath.init(row: self.messageArray.count, section: 0)], with: .fade)
+    } else {
+      self.messageTableView.insertRows(
+      at: [IndexPath.init(row: self.messageArray.count - 1, section: 0)],
       with: .fade
-    )
+      )
+    }
+    
+//    if messageArray.count >= 1 {
+//    self.messageTableView.insertRows(
+//      at: [IndexPath.init(row: self.messageArray.count - 1, section: 0)],
+//      with: .fade
+//    )
+//    } else {
+//      self.messageTableView.insertRows(at: [IndexPath.init(row: self.messageArray.count, section: 0)], with: .fade)
+//    }
+    
     self.messageTableView.endUpdates()
     
     UIView.animate(
@@ -178,7 +205,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.messages.count
+    return self.messageArray.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -188,7 +215,9 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
       for: indexPath
       ) as! CustomMessageCell
     
-    cell.messageBodyLabel.text = messages[indexPath.row]
+    cell.messageBodyLabel.text = messageArray[indexPath.row].messageBody
+    cell.senderUserNameLabel.text = messageArray[indexPath.row].sender
+    cell.avatarImageView.image = UIImage(named: "smile")
     
     return cell
   }

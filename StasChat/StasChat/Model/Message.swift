@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Model {
+class Message {
     var sender = ""
     var messageBody = ""
 }
