@@ -17,6 +17,9 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   @IBOutlet weak var controlPanelHeightConstaint: NSLayoutConstraint!
   @IBOutlet weak var sendButtonLabel: UILabel!
   
+  var messageDB: DatabaseReference!
+  
+  
   var tapGesture: UITapGestureRecognizer?
   
   let viewControll = ViewController()
@@ -27,6 +30,22 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.messageDB = Database.database().reference().child("Messages")
+    
+    self.messageDB.observe(.childAdded, with: { (snapshot) in
+      let snapshotValue = snapshot.value as! Dictionary<String, String>
+      let text = snapshotValue["MessageBody"]!
+      let sender = snapshotValue["Sender"] ?? "unknown sender"
+      print(text, sender)
+      let message = Message()
+      message.messageBody = text
+      message.sender = sender
+      self.messageArray.append(message)
+      self.configurateTableView()
+      self.messageTableView.reloadData()
+    })
+    
     
     viewControll.translucentNavBar()
     
@@ -79,6 +98,9 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
       selector: #selector(ChatViewController.keyboardDidHide(_:)),
       name: NSNotification.Name.UIKeyboardDidHide, object: nil
     )
+    
+
+    
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -128,11 +150,10 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     //self.messages.append(self.messageTextField.text ?? "")
    
     // Add message to FireBase
-    let messageDB = Database.database().reference().child("Messages")
     let messageDictionary = ["Sender": Auth.auth().currentUser?.email,
                              "MessageBody": self.messageTextField.text!]
     
-    messageDB.childByAutoId().setValue(messageDictionary) {
+    self.messageDB.childByAutoId().setValue(messageDictionary) {
       (error, reference) in
       
       if error != nil {
@@ -144,22 +165,7 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     //*************************
     
-    func retrieveMessages() {
-      let messageDB = Database.database().reference().child("Messages")
-      messageDB.observe(.childAdded, with: { (snapshot) in
-        let snapshotValue = snapshot.value as! Dictionary<String, String>
-        let text = snapshotValue["MessageBody"]!
-        let sender = snapshotValue["Sender"]!
-        print(text, sender)
-        let message = Message()
-        message.messageBody = text
-        message.sender = sender
-        self.messageArray.append(message)
-        self.configurateTableView()
-        //self.messageTableView.reloadData()
-      })
-    }
-    
+    /*
     self.messageTextField.text = nil
     self.messageTableView.beginUpdates()
     
@@ -194,7 +200,9 @@ class ChatViewController: UIViewController, UIGestureRecognizerDelegate {
     },
       completion: { completion in
     }
-    )
+    )*/
+    
+    
   }
 }
 
